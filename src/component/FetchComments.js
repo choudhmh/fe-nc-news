@@ -1,33 +1,41 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Comments from "./Comments";
 
 import { fetchComments } from "../utils/api";
+import SingleArticle from "./SingleArticle";
 
-import ItemRow from "./ItemRow";
-import Nav from "./nav";
-
-function fetchComments() {
+function FetchComment({ article_id }) {
   const [isLoading, setIsLoading] = useState(true);
-  const { article_id } = useParams();
 
-  const[getComments, setGetComments] = useState([]);
+  const [getComments, setGetComments] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
-
-    fetchComments(article_id).then((CommentData) => {
-        setGetComments(CommentData);
-
+    fetchComments(article_id).then((commentData) => {
+      setGetComments(commentData);
       setIsLoading(false);
     });
-  }, [article_id]);
+  }, [article_id])
 
+  return (
+    <main>
+      <h2> Display Comments</h2>
 
-return(
-    <main></main>
-)
+      {isLoading ? (
+        <p>is Loading....</p>
+      ) : (
+        <div>
 
+          {getComments.map((comment) => {
+            return <Comments key={comment.comment_id} comment={comment} />;
+
+          })}
+        </div>
+      )}
+    </main>
+  );
 }
 
-export default fetchComments;
+export default FetchComment;

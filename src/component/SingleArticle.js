@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import { fetchSingleArticle } from "../utils/api";
+import  FetchComments  from "./FetchComments";
 
 import ItemRow from "./ItemRow";
 import Nav from "./nav";
@@ -11,7 +12,7 @@ function SingleArticle() {
   const [singleArticle, setSingleArticle] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
-
+  
   const { article_id } = useParams();
 
   // Single Article using param
@@ -32,7 +33,7 @@ function SingleArticle() {
       {isLoading ? (
         <p>is Loading....</p>
       ) : (
-        <p>
+        <section>
           <Link>
             <p> Article Id:{singleArticle.article_id}</p>
           </Link>
@@ -42,7 +43,10 @@ function SingleArticle() {
           <p> Topic: {singleArticle.topics}</p>
           <p> Votes: {singleArticle.votes}</p>
           <p> Comment Count: {singleArticle.comment_count}</p>
-        </p>
+          <p> Body: {singleArticle.body}</p>
+       
+       <FetchComments article_id={singleArticle.article_id}/>
+        </section>
       )}
     </main>
   );

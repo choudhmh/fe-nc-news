@@ -20,6 +20,9 @@ export const fetchSingleArticle = (article_id) => {
 
 export const fetchComments = (article_id) => {
   return ncNews
-    .get(`${path}/articles/${article_id}/comments`)
-    .then(({ data: { comments } }) => comments);
+    .get(`${path}/${article_id}/comments`)
+    .then(( data) => {
+        console.log(data)
+         return data.data.comment;
+    });
 };
