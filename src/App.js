@@ -1,8 +1,8 @@
 import {
- getArticles
+ getArticles, 
 } from "./utils/api.js";
 
-import logo from './logo.svg';
+
 import './App.css';
 
 import { useState, useEffect } from "react";
@@ -10,16 +10,28 @@ import { Route, Routes } from 'react-router-dom';
 
 import Header from './component/Header';
 import Nav from './component/nav';
+
 import ArticleList from "./component/ArticleList.js";
+import SingleArticle from "./component/SingleArticle.js"
+
+
  
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
 
   const [articleList, setArticleList] = useState([]);
 
+  const[singleArticle, setSingleArticle] = useState([]);
+
+
+ 
+
 
   useEffect(() => {
+    setIsLoading(true)
     getArticles().then((articleListFromApi) => {
       setArticleList(articleListFromApi);
+      setIsLoading(false)
     });
   }, []);
 
@@ -32,9 +44,18 @@ function App() {
     <Nav/>
 
     <Routes>
-        <Route path="/" element={ <ArticleList
-            articleList={articleList}
+
+
+
+    <Route path="/articles/:article_id" element={ <SingleArticle
+            singleArticle={singleArticle} 
           /> } />
+          
+          
+        <Route path="/" element={ <ArticleList
+            articleList={articleList} 
+          /> } />
+
   </Routes>
 
     </div>
