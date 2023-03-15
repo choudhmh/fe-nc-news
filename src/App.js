@@ -10,6 +10,7 @@ import Nav from "./component/nav";
 
 import ArticleList from "./component/ArticleList.js";
 import SingleArticle from "./component/SingleArticle.js";
+import FetchComments from "./component/FetchComments.js";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -17,6 +18,7 @@ function App() {
   const [articleList, setArticleList] = useState([]);
 
   const [singleArticle, setSingleArticle] = useState([]);
+  const [getComments, setGetComments] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -32,12 +34,16 @@ function App() {
       <Nav />
 
       <Routes>
+      
+
         <Route
           path="/articles/:article_id"
           element={<SingleArticle singleArticle={singleArticle} />}
         />
 
         <Route path="/" element={<ArticleList articleList={articleList} />} />
+
+       
       </Routes>
     </div>
   );

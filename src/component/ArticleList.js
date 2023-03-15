@@ -11,14 +11,17 @@ function ArticleList({articleList}) {
 
 return(
     <main>
-     
+      {/* {isLoading ? (
+        <p>is Loading....</p>
+      ) : ( */}
      
      <ul>
             {articleList.map((article) =>{
             return <ItemRow key={article.article_id} article={article} />
+
             })}
         </ul>
-
+      {/* )} */}
     </main>
 )
 

@@ -20,6 +20,20 @@ export const fetchSingleArticle = (article_id) => {
 
 export const fetchComments = (article_id) => {
   return ncNews
-    .get(`${path}/articles/${article_id}/comments`)
-    .then(({ data: { comments } }) => comments);
+    .get(`${path}/${article_id}/comments`)
+    .then(( data) => {
+        console.log(data)
+         return data.data.comment;
+    });
 };
+
+export const patchArticleVotes = (article_id) =>{
+  
+  return ncNews.patch(`${path}/${article_id}`, {
+      inc_votes: 1, 
+    })
+      .then((response) => {
+          console.log(response.data)
+          return response.data.article;
+      })
+}

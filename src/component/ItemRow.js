@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function ItemRow({ article }) {
+
+ 
+
   return (
     <li>
       <h3>Author</h3> {article.author}
@@ -13,7 +16,7 @@ function ItemRow({ article }) {
       <h3>Created At </h3>
       {article.created_at}
       <h3>Votes</h3>
-      {article.votes}
+      
       <h3>Article_img_url </h3>
       {<img src={article.article_img_url} width={100} height={50} />}
       <h3>Comment Count </h3>
