@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 
 import { fetchSingleArticle } from "../utils/api";
 import  FetchComments  from "./FetchComments";
+import {patchArticleVotes} from '../utils/api.js'
 
 import ItemRow from "./ItemRow";
 import Nav from "./nav";
 
-function SingleArticle() {
+function SingleArticle({ article }) {
+
   const [singleArticle, setSingleArticle] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -26,6 +28,23 @@ function SingleArticle() {
     });
   }, [article_id]);
 
+
+  const [userVote, setUserVote] = useState(0);
+  const [isVotingErr, setIsVotingErr] = useState(false)
+
+  const hasVoted = userVote !== 0 ||  localStorage.getItem(singleArticle.article_id) === 'voted';
+
+  const onClick =() =>{
+    setIsVotingErr(false)
+    setUserVote(1);
+
+    localStorage.setItem(singleArticle.article_id, 'voted')
+    patchArticleVotes(singleArticle.article_id).catch(() =>{
+      setUserVote(0)
+      setIsVotingErr(true)
+    })
+  }
+
   return (
     <main>
       <h2> Single Article</h2>
@@ -41,7 +60,14 @@ function SingleArticle() {
           <p> Type: {singleArticle.type}</p>
           <p> Created At: {singleArticle.created_at}</p>
           <p> Topic: {singleArticle.topics}</p>
-          <p> Votes: {singleArticle.votes}</p>
+
+          <p> Votes: {singleArticle.votes + userVote}
+
+          {/* {singleArticle.votes + userVote} */}
+      <button onClick={onClick} disabled={hasVoted}>Vote</button>
+      {isVotingErr && <p>Vote didn't go through</p>}
+
+          </p>
           <p> Comment Count: {singleArticle.comment_count}</p>
           <p> Body: {singleArticle.body}</p>
        

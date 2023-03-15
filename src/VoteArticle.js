@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Button from "react-router-dom";
-import { patchArticleVotes } from "../utils/api";
+import { patchArticleVotes } from "./utils/api";
 
 function VoteOnArticle({ article }) {
   const [votes, setVotes] = useState(article.votes);
