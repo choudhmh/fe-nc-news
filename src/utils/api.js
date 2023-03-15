@@ -26,3 +26,14 @@ export const fetchComments = (article_id) => {
          return data.data.comment;
     });
 };
+
+export const patchArticleVotes = (article_id) =>{
+  
+  return ncNews.patch(`${path}/${article_id}`, {
+      inc_votes: 1, 
+    })
+      .then((response) => {
+          console.log(response.data)
+          return response.data.article;
+      })
+}

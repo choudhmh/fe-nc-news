@@ -11,9 +11,9 @@ function ArticleList({articleList}) {
 
 return(
     <main>
-      {isLoading ? (
+      {/* {isLoading ? (
         <p>is Loading....</p>
-      ) : (
+      ) : ( */}
      
      <ul>
             {articleList.map((article) =>{
@@ -21,7 +21,7 @@ return(
 
             })}
         </ul>
-      )}
+      {/* )} */}
     </main>
 )
 

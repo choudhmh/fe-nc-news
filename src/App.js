@@ -35,8 +35,6 @@ function App() {
 
       <Routes>
       
-      {/* <Route path="/articles/:article_id/comments" 
-        element={<FetchComments getComments={getComments} />} /> */}
 
         <Route
           path="/articles/:article_id"
