@@ -6,6 +6,9 @@ import Comments from "./Comments";
 import { fetchComments } from "../utils/api";
 import SingleArticle from "./SingleArticle";
 
+import { NewComment } from "./NewComments";
+import { DeleteComment } from "./DeleteComments";
+
 function FetchComment({ article_id }) {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -26,7 +29,13 @@ function FetchComment({ article_id }) {
       {isLoading ? (
         <p>is Loading....</p>
       ) : (
+
+        
         <div>
+
+<NewComment getComments={getComments} setGetComments={setGetComments}/>
+
+<DeleteComment setGetComments = {setGetComments} />
 
           {getComments.map((comment) => {
             return <Comments key={comment.comment_id} comment={comment} />;
