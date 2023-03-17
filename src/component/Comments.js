@@ -1,14 +1,11 @@
 import { deleteComments } from "../utils/api";
 import { useState, useEffect } from "react";
 
-
-
 function Comments({ comment, article_id, setGetComments}) {
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const[checkDeletion, setCheckDeletion] = useState('')
-
 
   useEffect(() => {
     if (loading) {
@@ -20,19 +17,9 @@ function Comments({ comment, article_id, setGetComments}) {
 
   const handleDelete = (comment_id) =>{
     
-    setGetComments((comments)=>{
-
-      return  comments.filter((comment) =>{
-        if(comment.comment_id != comment_id){
-          return true
-        }else{
-          return false;
-        }
-        
-       })
-    })
     deleteComments(article_id, comment_id)
     setMessage("Comment  deleted!!");
+    
   }
   
   return (
