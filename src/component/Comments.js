@@ -20,6 +20,9 @@ function Comments({ comment, article_id, setGetComments}) {
 
   const handleDelete = (comment_id) =>{
     
+    deleteComments(article_id, comment_id)
+    setMessage("Comment  deleted!!");
+
     setGetComments((comments)=>{
 
       return  comments.filter((comment) =>{
@@ -33,8 +36,6 @@ function Comments({ comment, article_id, setGetComments}) {
   
       
     })
-    deleteComments(article_id, comment_id)
-    setMessage("Comment  deleted!!");
   }
   
   return (

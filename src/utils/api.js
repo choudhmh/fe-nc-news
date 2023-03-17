@@ -29,7 +29,7 @@ export const fetchComments = (article_id) => {
   return ncNews
     .get(`${path}/${article_id}/comments`)
     .then(( data) => {
-        //console.log(data)
+      
          return data.data.comment;
     });
 };
@@ -56,13 +56,12 @@ export const postComment = (article_id, comment) => {
     newComment
   )
   .catch((error) => {
-    //console.error(error);
+  
     return error;
     });
 };
 
 export const deleteComments = (article_id, comment_id) => {
-  //console.log(comment_id, article_id)
 
   return ncNews.delete(`/comments/${comment_id}`)
   .catch((error) => {
