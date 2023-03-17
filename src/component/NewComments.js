@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 export const NewComment = ({  setGetComments, comments }) => {
 
   const { article_id } = useParams();
-  console.log(article_id)
+ 
   const [newComment, setNewComment] = useState("");
 
 
@@ -20,7 +20,7 @@ export const NewComment = ({  setGetComments, comments }) => {
         article_id: article_id,
         author: "grumpy19",
         body: newComment,
-        comment_id: -1,
+        comment_id: 1,
         created_at: new Date().toISOString(),
         votes: 0,
       }, ...comments]
@@ -31,11 +31,12 @@ export const NewComment = ({  setGetComments, comments }) => {
     .catch((error) => {
       console.error("Error while posting comment:", error);
     });
+  
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <textarea
+      <textarea required
         value={newComment}
         onChange={(e) => setNewComment(e.target.value)}
       />

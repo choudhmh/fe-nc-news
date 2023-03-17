@@ -11,8 +11,18 @@ function ArticleList() {
     const [isLoading, setIsLoading] = useState(true);
     const [sortBy, setSortBy] = useState('')
     const [articleList, setArticleList] = useState([]);
-  
-  
+
+    const [item, setItem] = useState(articleList);
+
+    const menuItems = [...new Set(articleList.map((Val) => Val.date))];
+    
+    const filterItem = (curcat) => {
+      const newItem = articleList.filter((newVal) => {
+        return newVal.date === curcat;
+      });
+      setItem(newItem);
+    };
+
     useEffect(() => {
       setIsLoading(true);
       getArticles(sortBy).then((articleListFromApi) => {
@@ -28,21 +38,17 @@ return(
         <p>is Loading....</p>
       ) : ( */}
      <div>
-<select 
-values={sortBy}
-onChange={(event) => setSortBy(event.target.value)}
->
-<option disabled value="">
-  Select a Query
-</option>
-<option value="created_at">Sort by Date</option>
-<option value="comment_count">Sort by Comment Count</option>
-<option value="votes">Sort by Votes</option>
-</select>
+<button filterItem={filterItem}
+            setItem={setItem}
+            menuItems={menuItems}>Vote</button>
+
+<button>Comment Count</button>
+<button>Date</button>
 </div>
      <ul>
+      
             {articleList.map((article) =>{
-            return <ItemRow key={article.article_id} article={article} />
+            return <ItemRow key={article.article_id} article={article} item={item}  />
 
             })}
         </ul>

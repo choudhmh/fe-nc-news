@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+
 import Comments from "./Comments";
 
 import { fetchComments } from "../utils/api";
-import SingleArticle from "./SingleArticle";
-
 import { NewComment } from "./NewComments";
-import { DeleteComment } from "./DeleteComments";
+
 
 function FetchComment({ article_id }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -35,10 +32,10 @@ function FetchComment({ article_id }) {
 
 <NewComment getComments={getComments} setGetComments={setGetComments}/>
 
-<DeleteComment setGetComments = {setGetComments} />
+{/* <DeleteComment setGetComments = {setGetComments} /> */}
 
           {getComments.map((comment) => {
-            return <Comments key={comment.comment_id} comment={comment} />;
+            return <Comments key={comment.comment_id} comment={comment}  article_id={article_id} setGetComments={setGetComments}/>;
 
           })}
         </div>

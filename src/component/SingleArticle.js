@@ -72,6 +72,7 @@ function SingleArticle({ article }) {
           <p> Body: {singleArticle.body}</p>
        
        <FetchComments article_id={singleArticle.article_id}/>
+       
         </section>
       )}
     </main>

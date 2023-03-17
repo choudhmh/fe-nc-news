@@ -46,7 +46,7 @@ export const patchArticleVotes = (article_id) =>{
 }
 
 export const postComment = (article_id, comment) => {
-  console.log(article_id, comment)
+
   const newComment = {
     username: "grumpy19",
     body: comment,
@@ -61,10 +61,12 @@ export const postComment = (article_id, comment) => {
     });
 };
 
-export const deleteComments = (article_id, commentId) => {
-  return ncNews.delete(`${path}/${article_id}/comments/${commentId}`)
+export const deleteComments = (article_id, comment_id) => {
+  //console.log(comment_id, article_id)
+
+  return ncNews.delete(`/comments/${comment_id}`)
   .catch((error) => {
-    console.error(error);
+  
     return error;
     });
 };
