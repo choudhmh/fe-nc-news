@@ -1,7 +1,8 @@
 import { getArticles } from "./utils/api.js";
+import { api } from './utils/api.js'
 
 import "./App.css";
-
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 
@@ -10,23 +11,21 @@ import Nav from "./component/nav";
 
 import ArticleList from "./component/ArticleList.js";
 import SingleArticle from "./component/SingleArticle.js";
-import FetchComments from "./component/FetchComments.js";
+
+
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
-
+  const { article_id } = useParams();
   const [articleList, setArticleList] = useState([]);
-
+  const [sortBy, setSortBy] = useState('')
   const [singleArticle, setSingleArticle] = useState([]);
   const [getComments, setGetComments] = useState([]);
 
-  useEffect(() => {
-    setIsLoading(true);
-    getArticles().then((articleListFromApi) => {
-      setArticleList(articleListFromApi);
-      setIsLoading(false);
-    });
-  }, []);
+  
+
+
+
 
   return (
     <div className="App">
@@ -35,13 +34,13 @@ function App() {
 
       <Routes>
       
+<Route path="/" element={<ArticleList articleList={articleList} />} />
 
         <Route
           path="/articles/:article_id"
           element={<SingleArticle singleArticle={singleArticle} />}
         />
 
-        <Route path="/" element={<ArticleList articleList={articleList} />} />
 
        
       </Routes>

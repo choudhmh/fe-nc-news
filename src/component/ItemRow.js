@@ -7,6 +7,8 @@ function ItemRow({ article }) {
  
 
   return (
+
+
     <li>
       <h3>Author</h3> {article.author}
       <h3> Title:</h3>{" "}
